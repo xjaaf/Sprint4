@@ -31,14 +31,12 @@ class ModelTeamsController extends Controller
     public function store(Request $request)
     {
         $data = $request;
-        //ModelTeams::create($data);
         ModelTeams::create([
             'equipo' => $data['equipo'],
             'ciudad' => $data['ciudad'],
             'puntos' => $data['puntos']
         ]);
         return redirect()->route('teams.index');
-
     }
 
     /**
@@ -52,19 +50,19 @@ class ModelTeamsController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ModelTeams $modelTeams)
-{
-    return view('teams.edit', ['modelTeams' => $modelTeams]);
-}
+    public function edit($id)
+    {
+        $team = ModelTeams::findOrFail($id);
+        return view('teams.edit', compact('team'));
+    }
+
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request)
+    public function update(Request $request, $id)
 {
-    $teamId = $request->input('team_id');
-
     // Recuperar el modelo del equipo basado en el ID
-    $modelTeams = ModelTeams::findOrFail($teamId);
+    $modelTeams = ModelTeams::findOrFail($id);
 
     // Validar los datos del formulario
     $validatedData = $request->validate([
@@ -86,13 +84,13 @@ class ModelTeamsController extends Controller
 }
 
 
+
     /**
      * Remove the specified resource from storage.
      */
     public function destroy(ModelTeams $modelTeams)
-{
-    $modelTeams->delete();
-    return redirect()->route('teams.index')->with('success', 'Team deleted successfully');
-}
-
+    {
+        $modelTeams->delete();
+        return redirect()->route('teams.index')->with('success', 'Team deleted successfully');
+    }
 }
