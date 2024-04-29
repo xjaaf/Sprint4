@@ -84,9 +84,9 @@
             </div>
         </div>
         <div class="flex items-center">
-            <a class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded mr-2 typewriter" href="teams" style="font-family: 'figtree', sans-serif;">Teams</a>
-            <a class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded mr-2 typewriter" href="games" style="font-family: 'figtree', sans-serif;">Games</a>
-            <a class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded typewriter" href="rankings" style="font-family: 'figtree', sans-serif;">Rankings</a>
+            <a class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded mr-2 typewriter" href="{{route('teams.index')}}" style="font-family: 'figtree', sans-serif;">Teams</a>
+            <a class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded mr-2 typewriter" href="{{route('games.index')}}" style="font-family: 'figtree', sans-serif;">Games</a>
+        
         </div>
     </div>
 </div>
