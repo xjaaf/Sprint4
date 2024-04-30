@@ -12,7 +12,7 @@ class ModelTeamsController extends Controller
      */
     public function index()
     {
-        $teams = ModelTeams::all();
+        $teams = modelTeams::all();
 
         return view('teams.teams', ['teams' => $teams]);
     }
