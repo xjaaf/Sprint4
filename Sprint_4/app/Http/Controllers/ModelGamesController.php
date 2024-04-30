@@ -71,8 +71,10 @@ class ModelGamesController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ModelGames $modelGames)
+    public function destroy(ModelGames $game)
     {
-        //
+        $game->delete();
+
+    return redirect()->route('games.index')->with('success', 'Game deleted successfully.');
     }
 }
