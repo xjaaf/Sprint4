@@ -154,7 +154,7 @@
                     {{ $game->team_home_id}}
                 </th>
                 <td class="px-6 py-4">
-                    {{ $game->points_home}} - {{ $game->points_visitor}}
+                    {{ $game->points_home}} -- {{ $game->points_visitor}}
                 </td>
                 <td class="px-6 py-4">
                     {{ $game->team_visitor_id}}
