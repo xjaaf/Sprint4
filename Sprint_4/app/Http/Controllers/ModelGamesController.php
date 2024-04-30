@@ -12,7 +12,9 @@ class ModelGamesController extends Controller
      */
     public function index()
     {
-        return view('games.games');
+        $games = modelGames::all();
+
+        return view('games.games', ['games' => $games]);
     }
 
     /**
