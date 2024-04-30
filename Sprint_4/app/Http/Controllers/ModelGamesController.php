@@ -13,7 +13,7 @@ class ModelGamesController extends Controller
      */
     public function index()
     {
-        $games = modelGames::all();
+        $games = ModelGames::all();
 
         return view('games.games', ['games' => $games]);
     }
@@ -44,27 +44,28 @@ class ModelGamesController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(ModelGames $modelGames)
-    {
-        //
-    }
-
-    /**
      * Show the form for editing the specified resource.
      */
-    public function edit(ModelGames $modelGames)
+    public function edit(ModelGames $game)
     {
-        //
+        $teams = ModelTeams::all();
+        return view('games.edit', ['game' => $game, 'teams' => $teams]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, ModelGames $modelGames)
+    public function update(Request $request, ModelGames $game)
     {
-        //
+        $request->validate([
+            'team_home_id' => 'required|different:team_visitor_id',
+            'team_visitor_id' => 'required|different:team_home_id',
+            'date_match' => 'required|date',
+        ]);
+
+        $game->update($request->all());
+
+        return redirect()->route('games.index');
     }
 
     /**

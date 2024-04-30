@@ -40,23 +40,6 @@
             margin: 0; /* Eliminar el margen superior e inferior */
         }
 
-        @keyframes typing {
-            from { width: 0 }
-            to { width: auto }
-        }
-
-        .typewriter {
-            overflow: hidden; /* Ocultar el desbordamiento de texto */
-            border-right: .15em solid orange; /* Crear un efecto de máquina de escribir */
-            white-space: nowrap; /* Mantener el texto en una línea */
-            animation: typing 1.5s steps(30, end), blink-caret .75s step-end infinite;
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: orange }
-        }
-
         /* Estilo para "Let's play" */
         .play-text {
             font-size: 28px; /* Tamaño de fuente */
@@ -88,18 +71,6 @@
         .container {
             padding: 0 10px;
         }
-
-        /* Estilos para hacer "Welcome to the league" responsive */
-        @media (max-width: 768px) {
-            .header h1 {
-                font-size: 24px;
-            }
-        }
-        @media (max-width: 576px) {
-            .header h1 {
-                font-size: 20px;
-            }
-        }
     </style>
 </head>
 <body class="antialiased">
@@ -111,7 +82,7 @@
             </div>
         </div>
         <div class="flex items-center">
-            <a class="btn-new-team" href="{{route('games.create')}}">
+            <a class="btn-new-team" href="{{ route('games.create') }}">
                 <span style="display: flex; align-items: center;">
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-1" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd" d="M10 1a1 1 0 0 1 1 1v7h7a1 1 0 0 1 0 2h-7v7a1 1 0 1 1-2 0v-7H3a1 1 0 1 1 0-2h7V2a1 1 0 0 1 1-1z" clip-rule="evenodd" />
@@ -119,8 +90,8 @@
                     Game
                 </span>
             </a> <!-- Botón para crear un nuevo equipo -->
-            <a class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded mr-2 typewriter" href="{{route('teams.index')}}"  style="font-family: 'figtree', sans-serif;">Teams</a>
-            <a class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded typewriter btn-home" href="{{route('home')}}" style="font-family: 'figtree', sans-serif;">Home</a>
+            <a class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded mr-2 typewriter" href="{{ route('teams.index') }}"  style="font-family: 'figtree', sans-serif;">Teams</a>
+            <a class="bg-yellow-500 hover:bg-yellow-600 text-black font-bold py-2 px-4 rounded typewriter btn-home" href="{{ route('home') }}" style="font-family: 'figtree', sans-serif;">Home</a>
         </div>
     </div>
 </div>
@@ -159,19 +130,20 @@
                 <td class="px-6 py-4">
                     <a href="{{ route('games.edit', $game->id) }}">Edit</a>
                     <!-- Formulario para eliminar -->
-                    <form id="deleteForm{{ $game->id }}" action="{{ route('teams.destroy', $game->id) }}" method="POST" style="display: inline;">
+                    <form id="deleteForm{{ $game->id }}" action="{{ route('games.destroy', $game->id) }}" method="POST" style="display: inline;">
                         @csrf
                         @method('DELETE')
                         <button type="submit" onclick="return confirm('¿Estás seguro de que quieres eliminar este equipo?')" class="text-red-500 ml-2">Delete</button>
                     </form>
                 </td>
+                
             </tr>
             @endforeach
         </tbody>
     </table>
 </div>
 
-<!-- Modal de confirmación omitido por brevedad -->
+
 
 <script>
     function openConfirmationModal(teamId) {
