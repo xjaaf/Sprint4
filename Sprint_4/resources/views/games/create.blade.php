@@ -75,6 +75,26 @@
         .submit-btn:hover {
             background-color: #45a049; /* Cambiar color de fondo al pasar el mouse */
         }
+
+        /* Estilo para el botón de cancelar */
+        .cancel-btn {
+            background-color: #ff0000; /* Color de fondo */
+            border: none; /* Sin borde */
+            color: white; /* Color del texto */
+            padding: 10px 20px; /* Espaciado interno */
+            text-align: center; /* Alinear al centro */
+            text-decoration: none; /* Sin decoración de texto */
+            font-size: 16px; /* Tamaño de fuente */
+            border-radius: 6px; /* Borde redondeado */
+            transition: background-color 0.3s ease; /* Transición suave del color de fondo */
+            margin-top: 20px; /* Margen superior */
+            cursor: pointer; /* Cambiar cursor al pasar el ratón */
+            margin-right: 10px; /* Margen derecho */
+        }
+
+        .cancel-btn:hover {
+            background-color: #cc0000; /* Cambiar color de fondo al pasar el mouse */
+        }
     </style>
 </head>
 <body class="antialiased">
@@ -120,13 +140,17 @@
             @enderror
         </div>
         <div class="mb-4">
-            <label for="date_match" class="block text-gray-700 text-sm font-bold mb-2">Match Date:</label>
-            <input type="date" name="date_match" id="date_match" class="w-full border-gray-300 rounded-lg focus:border-blue-500 focus:ring-blue-500">
+            <label for="date_match" class="block text-gray-700 text-sm font-bold mb-2">Match Date and Time:</label>
+            <input type="datetime-local" name="date_match" id="date_match" class="w-full border-gray-300 rounded-lg focus:border-blue-500 focus:ring-blue-500">
             @error('date_match')
                 <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
             @enderror
         </div>
-        <button type="submit" class="submit-btn">Create Game</button>
+        
+        <div class="flex justify-between">
+            <button type="submit" class="submit-btn">Create Game</button>
+            <a href="{{ route('games.index') }}" class="cancel-btn">Cancel</a>
+        </div>
     </form>
 </div>
 
