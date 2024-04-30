@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\ModelGames;
+use App\Models\ModelTeams;
 use Illuminate\Http\Request;
 
 class ModelGamesController extends Controller
@@ -22,8 +23,8 @@ class ModelGamesController extends Controller
      */
     public function create()
     {
-        return view('games.create');
-        
+        $teams = ModelTeams::all();
+        return view('games.create', ['teams' => $teams]);
     }
 
     /**
@@ -31,7 +32,15 @@ class ModelGamesController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'team_home_id' => 'required|different:team_visitor_id',
+            'team_visitor_id' => 'required|different:team_home_id',
+            'date_match' => 'required|date',
+        ]);
+
+        ModelGames::create($request->all());
+
+        return redirect()->route('games.index');
     }
 
     /**

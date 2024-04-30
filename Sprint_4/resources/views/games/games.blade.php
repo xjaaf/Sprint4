@@ -134,9 +134,6 @@
                     Home
                 </th>
                 <th scope="col" class="px-6 py-3">
-                    Points
-                </th>
-                <th scope="col" class="px-6 py-3">
                     Visitor
                 </th>
                 <th scope="col" class="px-6 py-3">
@@ -151,19 +148,16 @@
             @foreach ($games as $game)
             <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                 <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-                    {{ $game->team_home_id}}
+                    {{ $game->homeTeam->equipo }}
                 </th>
                 <td class="px-6 py-4">
-                    {{ $game->points_home}} -- {{ $game->points_visitor}}
+                    {{ $game->visitorTeam->equipo }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $game->team_visitor_id}}
+                    {{ $game->date_match }}
                 </td>
                 <td class="px-6 py-4">
-                    {{ $game->date_match}}
-                </td>
-                <td class="px-6 py-4">
-                    <a href="{{route('games.edit', $game->id)}}">Edit</a>
+                    <a href="{{ route('games.edit', $game->id) }}">Edit</a>
                     <!-- Formulario para eliminar -->
                     <form id="deleteForm{{ $game->id }}" action="{{ route('teams.destroy', $game->id) }}" method="POST" style="display: inline;">
                         @csrf

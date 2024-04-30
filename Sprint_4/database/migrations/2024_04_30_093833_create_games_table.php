@@ -15,8 +15,6 @@ return new class extends Migration
             $table->id();
             $table->foreignId('team_home_id')->constrained('Model_teams');
             $table->foreignId('team_visitor_id')->constrained('Model_teams');
-            $table->integer('points_home')->nullable();
-            $table->integer('points_visitor')->nullable();
             $table->dateTime('date_match');
             $table->timestamps();
 
