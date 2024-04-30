@@ -30,21 +30,15 @@ class ModelTeamsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request;
-        ModelTeams::create([
-            'equipo' => $data['equipo'],
-            'ciudad' => $data['ciudad'],
-            'puntos' => $data['puntos']
+        $data = $request->validate([
+            'equipo' => 'required|string|max:255',
+            'ciudad' => 'required|string|max:255',
+            'puntos' => 'required|numeric',
         ]);
-        return redirect()->route('teams.index');
-    }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(ModelTeams $modelTeams)
-    {
-        //
+        ModelTeams::create($data);
+
+        return redirect()->route('teams.index')->with('success', 'Team created successfully');
     }
 
     /**
@@ -60,37 +54,27 @@ class ModelTeamsController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, $id)
-{
-    // Recuperar el modelo del equipo basado en el ID
-    $modelTeams = ModelTeams::findOrFail($id);
+    {
+        $validatedData = $request->validate([
+            'equipo' => 'required|string|max:255',
+            'ciudad' => 'required|string|max:255',
+            'puntos' => 'required|numeric',
+        ]);
 
-    // Validar los datos del formulario
-    $validatedData = $request->validate([
-        'equipo' => 'required|string|max:255',
-        'ciudad' => 'required|string|max:255',
-        'puntos' => 'required|numeric',
-    ]);
+        $team = ModelTeams::findOrFail($id);
+        $team->update($validatedData);
 
-    // Actualizar los atributos del modelo con los datos del formulario
-    $modelTeams->equipo = $validatedData['equipo'];
-    $modelTeams->ciudad = $validatedData['ciudad'];
-    $modelTeams->puntos = $validatedData['puntos'];
-
-    // Guardar los cambios en la base de datos
-    $modelTeams->save();
-
-    // Redirigir a la página de índice de equipos
-    return redirect()->route('teams.index');
-}
-
-
+        return redirect()->route('teams.index')->with('success', 'Team updated successfully');
+    }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(ModelTeams $modelTeams)
+    public function destroy($id)
     {
-        $modelTeams->delete();
+        $team = ModelTeams::findOrFail($id);
+        $team->delete();
+
         return redirect()->route('teams.index')->with('success', 'Team deleted successfully');
     }
 }

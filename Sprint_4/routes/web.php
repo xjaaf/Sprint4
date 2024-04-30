@@ -24,14 +24,3 @@ Route::resource('games', ModelGamesController::class);
 
 
 
-/*
-Route::get('/teams', function () {
-    return view('teams');
-});
-Route::get('/home', function () {
-    return view('home');
-});
-Route::get('/games', function () {
-    return view('games');
-});
-*/
